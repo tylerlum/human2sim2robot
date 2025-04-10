@@ -1,0 +1,56 @@
+seed: ${..seed}
+network:
+  separate_value_mlp: False
+
+  mlp:
+    units: [512, 512]
+  rnn:
+    name: lstm
+    units: 1024
+    layers: 1
+    before_mlp: False
+    layer_norm: True
+    concat_input: False
+    concat_output: True
+
+ppo:
+  multi_gpu: ${...multi_gpu}
+  mixed_precision: False
+  normalize_input: True
+  normalize_value: True
+  value_bootstrap: False
+  num_actors: ${...task.env.numEnvs}
+  reward_shaper:
+    scale_value: 1.0
+  normalize_advantage: True
+  gamma: 0.998
+  tau: 0.95
+  learning_rate: 1e-4
+  lr_schedule: linear
+  schedule_type: standard
+  kl_threshold: 0.01
+  max_epochs: ${resolve_default:2_000_000,${...max_iterations}}
+  save_best_after: 100
+  save_frequency: 1000
+  print_stats: True
+  grad_norm: 1.0
+  entropy_coef: 0.0
+  truncate_grads: True
+  e_clip: 0.2
+  horizon_length: 16
+  minibatch_size: 16384
+  mini_epochs: 4
+  critic_coef: 4
+  seq_length: 16
+  bound_loss_type: regularisation
+  bounds_loss_coef: 0.005
+  zero_rnn_on_done: True
+
+  # Must be None if empty (else gets error looking for keys in this dict)
+  asymmetric_critic: ${if:${eval:"'empty' in '${...asymmetric_critic.name}'"},${eval:None},${...asymmetric_critic}}
+
+
+player:
+  deterministic: True
+  games_num: 100_000
+  print_stats: True

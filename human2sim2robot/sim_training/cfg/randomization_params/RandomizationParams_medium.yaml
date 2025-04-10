@@ -1,0 +1,77 @@
+defaults:
+  - robot_params: RobotParams_medium  # Avoid setting right and left hand params separately
+  - _self_
+
+frequency: 720 # Define how many simulation steps between generating new randomizations
+
+observations:
+    range: [0, .01]
+    range_correlated: [0, .01]
+    operation: "additive"
+    distribution: "gaussian"
+    schedule: "constant"  # turn on noise after `schedule_steps` num steps
+    schedule_steps: 5000
+actions:
+    range: [0., .01]
+    range_correlated: [0., .01]
+    operation: "additive"
+    distribution: "gaussian"
+    schedule: "linear"  # linearly interpolate between 0 randomization and full range
+    schedule_steps: 5000
+sim_params:
+  gravity:
+    range: [0, 0.3]
+    operation: "additive"
+    distribution: "gaussian"
+
+actor_params:
+  right_robot: ${..robot_params}
+
+  object:
+    scale:
+      range: [0.7, 1.3]
+      operation: "scaling"
+      distribution: "uniform"
+      setup_only: True # Property will only be randomized once before simulation is started. See Domain Randomization Documentation for more info.
+    rigid_body_properties:
+      mass:
+        range: [0.7, 1.3] # after fixing the API expand it even more
+        operation: "scaling"
+        distribution: "uniform"
+        setup_only: True # Property will only be randomized once before simulation is started. See Domain Randomization Documentation for more info.
+    rigid_shape_properties:
+      friction:
+        num_buckets: 100
+        range: [0.7, 1.3]
+        operation: "scaling"
+        distribution: "uniform"
+      restitution:
+        num_buckets: 100
+        range: [0.0, 0.3]
+        operation: "additive"
+        distribution: "uniform"
+
+  table:
+    scale:
+      range: [0.7, 1.3]
+      operation: "scaling"
+      distribution: "uniform"
+      setup_only: True # Property will only be randomized once before simulation is started. See Domain Randomization Documentation for more info.
+    rigid_body_properties:
+      mass:
+        range: [0.7, 1.3] # after fixing the API expand it even more
+        operation: "scaling"
+        distribution: "uniform"
+        setup_only: True # Property will only be randomized once before simulation is started. See Domain Randomization Documentation for more info.
+    rigid_shape_properties:
+      friction:
+        num_buckets: 100
+        range: [0.7, 1.3]
+        operation: "scaling"
+        distribution: "uniform"
+      restitution:
+        num_buckets: 100
+        range: [0.0, 0.3]
+        operation: "additive"
+        distribution: "uniform"
+

@@ -1,0 +1,13 @@
+name: AsymmetricCritic_mlp
+minibatch_size: 16384 
+mini_epochs: 4
+learning_rate: 5e-5
+normalize_input: True
+truncate_grads: True
+
+network:
+  asymmetric_critic: True
+  separate_value_mlp: False
+
+  mlp:
+    units: [1024, 512] 

@@ -1,0 +1,54 @@
+scale:
+  range: [0.99, 1.01]
+  operation: "scaling"
+  distribution: "uniform"
+  setup_only: True # Property will only be randomized once before simulation is started. See Domain Randomization Documentation for more info.
+color: True
+dof_properties:
+  damping:
+    range: [0.99, 1.01]
+    operation: "scaling"
+    distribution: "loguniform"
+  stiffness:
+    range: [0.99, 1.01]
+    operation: "scaling"
+    distribution: "loguniform"
+  effort:
+    range: [0.99, 1.01]
+    operation: "scaling"
+    distribution: "uniform"
+  friction:
+    range: [0.99, 1.01]
+    operation: "scaling"
+    distribution: "uniform"
+  armature:
+    range: [0.99, 1.01]
+    operation: "scaling"
+    distribution: "uniform"
+  # lower:
+  #   range: [-5.0, 5.0]
+  #   operation: "additive"
+  #   distribution: "uniform"
+  # upper:
+  #   range: [-5.0, 5.0]
+  #   operation: "additive"
+  #   distribution: "uniform"
+
+rigid_body_properties:
+  mass:
+    range: [0.99, 1.01] # change when runtime API is available
+    operation: "scaling"
+    distribution: "uniform"
+    setup_only: True # Property will only be randomized once before simulation is started. See Domain Randomization Documentation for more info.
+
+rigid_shape_properties:
+  friction:
+    num_buckets: 100
+    range: [0.99, 1.01]
+    operation: "scaling"
+    distribution: "uniform"
+  restitution:
+    num_buckets: 100
+    range: [0, 0.01]
+    operation: "additive"
+    distribution: "uniform"

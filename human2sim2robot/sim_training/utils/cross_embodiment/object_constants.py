@@ -1,0 +1,27 @@
+OBJECT_NUM_RIGID_BODIES = 1
+NUM_OBJECT_KEYPOINTS = 3
+
+OBJECT_KEYPOINTS_LEN = 0.2
+
+OBJECT_KEYPOINT_OFFSETS = [
+    [OBJECT_KEYPOINTS_LEN, 0.0, 0.0],
+    [0.0, OBJECT_KEYPOINTS_LEN, 0.0],
+    [0.0, 0.0, OBJECT_KEYPOINTS_LEN],
+]
+# Useful for objects like the cup or plate that are symmetric around the z-axis
+OBJECT_KEYPOINT_OFFSETS_YAW_INVARIANT = [
+    [0.0, 0.0, 0.0],
+    [0.0, 0.0, 0.0],
+    [0.0, 0.0, OBJECT_KEYPOINTS_LEN],
+]
+
+OBJECT_KEYPOINT_OFFSETS_ROT_INVARIANT = [
+    [0.0, 0.0, 0.0],
+    [0.0, 0.0, 0.0],
+    [0.0, 0.0, 0.0],
+]
+assert (
+    len(OBJECT_KEYPOINT_OFFSETS)
+    == len(OBJECT_KEYPOINT_OFFSETS_ROT_INVARIANT)
+    == NUM_OBJECT_KEYPOINTS
+)

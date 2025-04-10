@@ -1,0 +1,69 @@
+# Task name - used to pick the class to load
+task_name: ${task.name}
+# experiment name - name of this experiment, first part of the full experiment name
+experiment: ${task.name}
+# full experiment name - used to name the output directory, wandb run, etc.
+full_experiment_name: ${experiment}_${datetime_str:}
+
+# if set to positive integer, overrides the default number of environments
+num_envs: ''
+
+# seed - set to -1 to choose random seed
+seed: 42
+# set to True for deterministic performance
+torch_deterministic: False
+
+# set the maximum number of learning iterations to train for. overrides default per-environment setting
+max_iterations: ''
+
+## Device config
+#  'physx' or 'flex'
+physics_engine: 'physx'
+# whether to use cpu or gpu pipeline
+pipeline: 'gpu'
+device_id: 0  # 'cuda:?', -1 for cpu
+graphics_device_id: 0
+# device for running physics simulation
+sim_device: ''
+# device to run RL
+rl_device: ''
+
+## PhysX arguments
+num_threads: 4 # Number of worker threads per scene used by PhysX - for CPU PhysX only.
+solver_type: 1 # 0: pgs, 1: tgs
+num_subscenes: 4 # Splits the simulation into N physics scenes and runs each one in a separate thread
+
+# RLGames Arguments
+# test - if set, run policy in inference mode (requires setting checkpoint to load)
+test: False
+# used to set checkpoint path
+checkpoint: ''
+# set sigma when restoring network
+sigma: ''
+# set to True to use multi-gpu horovod training
+multi_gpu: False
+
+wandb_activate: True
+wandb_group: ''
+wandb_name: ${full_experiment_name}  # name of the wandb run, defaults to full_experiment_name
+wandb_entity: 'tylerlum'
+wandb_project: 'cross_embodiment'
+
+# disables rendering
+headless: False
+
+# set default task and default training config based on task
+defaults:
+  - task: CrossEmbodiment
+  - train: CrossEmbodimentPPO
+  - randomization_params: RandomizationParams_empty
+  - asymmetric_critic: AsymmetricCritic_mlp
+  - override hydra/job_logging: disabled
+  - _self_
+
+# set the directory where the output files get saved
+hydra:
+  output_subdir: null
+  run:
+    dir: .
+

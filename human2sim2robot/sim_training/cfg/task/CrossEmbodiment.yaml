@@ -1,0 +1,158 @@
+name: CrossEmbodiment
+full_experiment_name: ${..full_experiment_name}
+
+physics_engine: ${..physics_engine}
+
+env:
+  numEnvs: ${resolve_default:4096,${...num_envs}}
+  envSpacing: 1.5
+
+  enableCameraSensors: True
+
+  clipObservations: 5.0
+  clipActions: 1.0
+  controlFrequencyInv: 1
+
+  # BRITTLE:
+  # Can set to -1 to compute numObservations and numActions at runtime
+  # Can also set directly
+  numStates: -1
+  numObservations: -1
+  numActions: -1
+  numAgents: 1
+
+  maxEpisodeLength: ${eval:'int(8 / (${..sim.dt} * ${.controlFrequencyInv}))'}  # 6 seconds
+
+  custom:
+    log:
+      populateWandbDictEveryNSteps: 10
+      captureVideo: True
+      numVideoFrames: 150
+      captureVideoEveryNSteps: 2_000
+      saveBestModelToWandbEveryNSteps: 2_000
+      printMetricsEveryNSteps: 100
+    randomForces:
+      forceProb: 0.05
+      forceScale: 50.0
+      torqueProb: 0.0
+      torqueScale: 50.0
+
+    FORCE_REFERENCE_TRAJECTORY_TRACKING: True
+    OBJECT_ORIENTATION_MATTERS: True
+    RANDOMIZE_GOAL_OBJECT_ORIENTATION_DEG: 60
+    curriculum:
+      enabled: False
+      log_freq: 100
+      min_steps_between_updates: 1000
+      success_threshold_to_start_curriculum: 40
+      success_threshold: 30
+      consecutive_successes_required_to_update: 10
+    curriculum_updates:
+      - variable_name: "object_friction"
+        update_amount: -0.1
+        min: 0.5
+        max: ${eval:'None'}
+      - variable_name: "object_mass_scale"
+        update_amount: 0.1
+        min: ${eval:'None'}
+        max: 1.5
+      - variable_name: "object_inertia_scale"
+        update_amount: 0.1
+        min: ${eval:'None'}
+        max: 1.5
+      - variable_name: "random_torque_prob"
+        update_amount: 0.01
+        min: ${eval:'None'}
+        max: 0.2
+      - variable_name: "random_torque_scale"
+        update_amount: 10.0
+        min: ${eval:'None'}
+        max: 80.0
+      - variable_name: "random_force_prob"
+        update_amount: 0.01
+        min: ${eval:'None'}
+        max: 0.2
+      - variable_name: "random_force_scale"
+        update_amount: 10.0
+        min: ${eval:'None'}
+        max: 80.0
+      - variable_name: "observed_object_uncorr_pos_noise"
+        update_amount: 0.01
+        min: ${eval:'None'}
+        max: 0.05
+      - variable_name: "observed_object_uncorr_rpy_deg_noise"
+        update_amount: 5
+        min: ${eval:'None'}
+        max: 30
+      - variable_name: "observed_object_corr_pos_noise"
+        update_amount: 0.01
+        min: ${eval:'None'}
+        max: 0.05
+      - variable_name: "observed_object_corr_rpy_deg_noise"
+        update_amount: 5
+        min: ${eval:'None'}
+        max: 30
+      - variable_name: "observed_object_random_pose_injection_prob"
+        update_amount: 0.01
+        min: ${eval:'None'}
+        max: 0.3
+    USE_FABRIC_ACTION_SPACE: True
+    FABRIC_HAND_ACTION_SPACE: "PCA"
+    ENABLE_FABRIC_COLLISION_AVOIDANCE: True
+    FABRIC_CSPACE_DAMPING: 65
+    FABRIC_CSPACE_DAMPING_HAND: 5
+    SUCCESS_REGION_RADIUS: 0.05
+    enableDebugViz: True
+    object_friction: 0.5
+    object_mass_scale: 1.0
+    object_inertia_scale: 1.0
+    right_robot_friction: 0.5
+    table_friction: 0.3
+    OBSERVED_OBJECT_UNCORR_POS_NOISE: 0.02
+    OBSERVED_OBJECT_UNCORR_RPY_DEG_NOISE: 15.0
+    OBSERVED_OBJECT_CORR_POS_NOISE: 0.02
+    OBSERVED_OBJECT_CORR_RPY_DEG_NOISE: 15.0
+    OBSERVED_OBJECT_RANDOM_POSE_INJECTION_PROB: 0.1
+    reset_object_sample_noise_x: 0.1
+    reset_object_sample_noise_y: 0.1
+    reset_object_sample_noise_z: 0.01
+    reset_object_sample_noise_roll_deg: 0.0
+    reset_object_sample_noise_pitch_deg: 0.0
+    reset_object_sample_noise_yaw_deg: 20.0
+    reset_right_robot_sample_noise_arm_deg: 2.0
+    reset_right_robot_sample_noise_hand_deg: 2.0
+    action_smoothing_penalty_weight: 0
+
+    object_urdf_path: "ikea/plate/plate.urdf"
+    retargeted_robot_file: data/human_demo_processed_data/plate_pivotliftrack/retargeted_robot.npz
+    object_poses_dir: data/human_demo_processed_data/plate_pivotliftrack/object_pose_trajectory/ob_in_cam
+
+    USE_CUROBO: True
+
+sim:
+  substeps: 2
+  dt: ${eval:'1.0 / 60'}
+  up_axis: "z"
+  use_gpu_pipeline: ${eq:${...pipeline},"gpu"}
+  num_client_threads: 8
+
+  enable_viewer_sync_at_start: True
+
+  gravity: [0.0, 0.0, -9.81]
+  physx:
+    num_threads: ${....num_threads}
+    solver_type: ${....solver_type}
+    use_gpu: ${contains:"cuda",${....sim_device}}
+    num_position_iterations: 8
+    num_velocity_iterations: 8
+    contact_offset: 0.005
+    rest_offset: 0.0
+    bounce_threshold_velocity: 0.2
+    max_depenetration_velocity: 10000.0 # Original: 1000.0
+    default_buffer_size_multiplier: 20.0
+    max_gpu_contact_pairs: ${eval:'8*1024*1024'} # Original: 1024*1024
+    num_subscenes: ${....num_subscenes}
+    contact_collection: 1 # 0: CC_NEVER (don't collect contact info), 1: CC_LAST_SUBSTEP (collect only contacts on last substep), 2: CC_ALL_SUBSTEPS (broken - do not use!)
+
+randomize: False
+randomization_params: ${..randomization_params}
