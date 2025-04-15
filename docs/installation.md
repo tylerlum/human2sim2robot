@@ -38,7 +38,7 @@ conda install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
 conda install -c conda-forge ffmpeg
 
 # Misc dependencies
-pip install matplotlib numpy scipy pybullet tqdm tyro pynput transforms3d cached_property_with_invalidation wandb tensorboard tensorboardX ruff omegaconf hydra-core urdfpy gym trimesh imageio[ffmpeg] live_plotter isaacgym-stubs open3d  # replace imageio[ffmpeg] with imageio\[ffmpeg\] if on zsh
+pip install matplotlib numpy scipy pybullet tqdm tyro pynput transforms3d cached_property_with_invalidation wandb tensorboard tensorboardX ruff omegaconf hydra-core urdfpy gym trimesh imageio'[ffmpeg]' live_plotter isaacgym-stubs open3d
 
 # Clone the repository
 git clone https://github.com/tylerlum/human2sim2robot.git
