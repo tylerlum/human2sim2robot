@@ -63,7 +63,7 @@ python human2sim2robot/human_demo/visualize_point_cloud.py \
 
 ## Creating Object and Hand Segmentation Masks
 
-The goal of this section is to create segmentation masks of the object and the hand using Segment Anything Model 2 (SAM 2). This requires two human prompts: one for selecting a point on the object/hand (positive prompt) and one for selecting a point NOT on the object/hand (negative prompt). Make sure that you have installed SAM 2 (instructions [here](../docs/installation.md)). Then run the following:
+The goal of this section is to create segmentation masks of the object and the hand using Segment Anything Model 2 (SAM 2). This requires two human prompts: one for selecting a point on the object/hand (positive prompt) and one for selecting a point NOT on the object/hand (negative prompt). Make sure that you have installed SAM 2 (instructions [here](../../docs/installation.md)). Then run the following:
 
 ```
 python thirdparty/segment-anything-2-real-time/video_sam2.py \
@@ -91,7 +91,7 @@ data/human_demo_raw_data/$TASK_NAME/
 
 ## Predicting Object Pose Trajectory
 
-The goal of this section is to predict the object pose trajectory using FoundationPose. Make sure that you have installed FoundationPose (instructions [here](../docs/installation.md)). 
+The goal of this section is to predict the object pose trajectory using FoundationPose. Make sure that you have installed FoundationPose (instructions [here](../../docs/installation.md)). 
 
 Before running FoundationPose, you need to have a 3D mesh of the object. See [here](../real_to_sim/README.md) for more information.
 
@@ -131,7 +131,7 @@ data/human_demo_processed_data/$TASK_NAME/object_pose_trajectory/
 
 ## Predicting Hand Pose Trajectory
 
-The goal of this section is to predict the hand pose trajectory using HaMeR with additional processing to get the hand pose at every timestep. Make sure that you have installed HaMeR depth environment (instructions [here](../docs/installation.md)). Then run the following:
+The goal of this section is to predict the hand pose trajectory using HaMeR with additional processing to get the hand pose at every timestep. Make sure that you have installed HaMeR depth environment (instructions [here](../../docs/installation.md)). Then run the following:
 
 ```
 python thirdparty/hamer_depth/run.py \
@@ -201,4 +201,4 @@ This creates the following with the retargeted robot trajectory and an interpola
 data/human_demo_processed_data/$TASK_NAME/retargeted_robot.npz
 ```
 
-Refer to the main [README](../README.md) for more visualization instructions.
+Refer to the main [README](../../README.md) for more visualization instructions.
