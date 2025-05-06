@@ -90,8 +90,8 @@ class ImageSaver:
 
             rgb_file_path = self.rgb_save_dir / f"{idx:05d}.png"
             depth_file_path = self.depth_save_dir / f"{idx:05d}.png"
-            cv2.imwrite(rgb_file_path, rgb_image)
-            cv2.imwrite(depth_file_path, depth_image)
+            cv2.imwrite(str(rgb_file_path), rgb_image)
+            cv2.imwrite(str(depth_file_path), depth_image)
             rospy.loginfo(
                 f"Saved RGB image to {rgb_file_path} and depth image to {depth_file_path}"
             )
