@@ -1000,10 +1000,9 @@ def main():
                     diffs = l1_diffs
                 elif METRIC == "inf":
                     diffs = linf_diffs
+                else:
+                    raise ValueError(f"Invalid METRIC = {METRIC}")
 
-                selected_idx = np.argmin(diffs)
-
-                diffs = np.linalg.norm(q_arm - prev_q_arm[None], axis=1, ord=np.inf)
                 idx_diff = i - Q_IDX_LIST[-1]
                 best_solution_linf_diff = np.min(np.rad2deg(linf_diffs))
                 if best_solution_linf_diff > MAX_ARM_JOINT_DIST_DEG * idx_diff:
