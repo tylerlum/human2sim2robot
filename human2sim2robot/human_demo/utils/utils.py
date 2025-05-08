@@ -16,13 +16,6 @@ def normalize(v: np.ndarray) -> np.ndarray:
     return v / norm
 
 
-# TODO: Remove unused functions here
-
-"""
-Transforms point by transform T
-"""
-
-
 def transform_point(T: np.ndarray, point: np.ndarray) -> np.ndarray:
     """
     Transform point by transform T
