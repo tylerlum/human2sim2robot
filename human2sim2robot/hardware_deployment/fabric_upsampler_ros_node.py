@@ -5,8 +5,9 @@ from typing import Optional
 
 import numpy as np
 import rospy
-from print_utils import get_ros_loop_rate_str
 from sensor_msgs.msg import JointState
+
+from human2sim2robot.hardware_deployment.utils.print_utils import get_ros_loop_rate_str
 
 # Constants
 NUM_ARM_JOINTS = 7

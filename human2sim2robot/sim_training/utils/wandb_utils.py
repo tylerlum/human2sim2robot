@@ -1,6 +1,7 @@
 from typing import List, Optional, TextIO, Tuple
 
 import wandb
+
 from human2sim2robot.sim_training.utils.cross_embodiment.utils import assert_equals
 
 

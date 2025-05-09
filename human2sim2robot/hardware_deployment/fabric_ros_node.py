@@ -14,10 +14,10 @@ from fabrics_sim.fabrics.kuka_allegro_pose_fabric import KukaAllegroPoseFabric
 from fabrics_sim.integrator.integrators import DisplacementIntegrator
 from fabrics_sim.utils.utils import capture_fabric, initialize_warp
 from fabrics_sim.worlds.world_mesh_model import WorldMeshesModel
-from print_utils import get_ros_loop_rate_str
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Float64MultiArray
 
+from human2sim2robot.hardware_deployment.utils.print_utils import get_ros_loop_rate_str
 from human2sim2robot.sim_training.utils.cross_embodiment.fabric_world import (
     world_dict_robot_frame,
 )

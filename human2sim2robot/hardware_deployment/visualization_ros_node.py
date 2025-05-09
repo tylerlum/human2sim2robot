@@ -14,11 +14,11 @@ import sensor_msgs.point_cloud2 as pc2
 import trimesh
 import tyro
 from geometry_msgs.msg import Pose
-from print_utils import get_ros_loop_rate_str
 from scipy.spatial.transform import Rotation as R
 from sensor_msgs.msg import JointState, PointCloud2
 from std_msgs.msg import Float64MultiArray
 
+from human2sim2robot.hardware_deployment.utils.print_utils import get_ros_loop_rate_str
 from human2sim2robot.sim_training import get_asset_root
 from human2sim2robot.sim_training.utils.cross_embodiment.camera_extrinsics import (
     REALSENSE_CAMERA_T_R_C,

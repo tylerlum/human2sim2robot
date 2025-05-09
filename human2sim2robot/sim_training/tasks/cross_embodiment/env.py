@@ -13,13 +13,13 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 import trimesh
+import wandb
 import yaml
 from cached_property_with_invalidation import cached_property_with_invalidation
 from omegaconf import OmegaConf
 from scipy.spatial.transform import Rotation as R
 from urdfpy import URDF
 
-import wandb
 from human2sim2robot.ppo.utils.dict_to_dataclass import dict_to_dataclass
 from human2sim2robot.sim_training import (
     datetime_str,

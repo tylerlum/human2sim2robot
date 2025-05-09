@@ -4,10 +4,10 @@ import numpy as np
 import rospy
 import torch
 from geometry_msgs.msg import Pose
-from print_utils import get_ros_loop_rate_str
 from scipy.spatial.transform import Rotation as R
 from sensor_msgs.msg import JointState
 
+from human2sim2robot.hardware_deployment.utils.print_utils import get_ros_loop_rate_str
 from human2sim2robot.sim_training.utils.cross_embodiment.camera_extrinsics import (
     ZED_CAMERA_T_R_C,
 )

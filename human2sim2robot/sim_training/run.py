@@ -41,11 +41,12 @@ def main(cfg: DictConfig):
     from pathlib import Path
 
     import torch
+    import wandb
 
     # noinspection PyUnresolvedReferences
     from hydra.utils import to_absolute_path
+    from wandb.sdk.lib.runid import generate_id
 
-    import wandb
     from human2sim2robot.ppo.ppo_agent import PpoAgent, PpoConfig
     from human2sim2robot.ppo.ppo_player import PlayerConfig, PpoPlayer
     from human2sim2robot.ppo.utils.dict_to_dataclass import dict_to_dataclass
@@ -56,7 +57,6 @@ def main(cfg: DictConfig):
         print_dict,
     )
     from human2sim2robot.sim_training.utils.utils import set_np_formatting, set_seed
-    from wandb.sdk.lib.runid import generate_id
 
     merge_with_default_config = True  # HACK
     if merge_with_default_config:
