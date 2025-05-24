@@ -251,7 +251,7 @@ We need to use different environments the following:
 cd $THIRD_PARTY_DIR
 git clone https://github.com/tylerlum/segment-anything-2-real-time.git
 cd segment-anything-2-real-time
-git checkout Human2Sim2Robot  # Last tested on commit hash d4ea81a1b9f3a43fb996443368cfce64c3c58c4e
+git checkout Human2Sim2Robot  # Last tested on commit hash c5055bc3a6cbc7d2d9cd7fd0d3bd20ec637c2f60
 ```
 
 * Object Pose Estimation using FoundationPose:
@@ -260,16 +260,16 @@ git checkout Human2Sim2Robot  # Last tested on commit hash d4ea81a1b9f3a43fb9964
 cd $THIRD_PARTY_DIR
 git clone https://github.com/tylerlum/FoundationPose.git
 cd FoundationPose
-git checkout Human2Sim2Robot  # Last tested on commit hash ee6ef78555298a07b55f9e0f9bc0f12be546b663
+git checkout Human2Sim2Robot  # Last tested on commit hash 8732cd8392ef7bc3a3875f02b08090b943655cb2
 ```
 
 * Hand Pose Estimation using HaMeR:
 
 ```
 cd $THIRD_PARTY_DIR
-git clone https://github.com/tylerlum/human_shadow.git
+git clone https://github.com/tylerlum/hamer_depth.git
 cd human_shadow
-git checkout Human2Sim2Robot  # Last tested on commit hash e2fb81e3a339185d1f0764da3167607b31608d92
+git checkout Human2Sim2Robot  # Last tested on commit hash 84dd92cd04ec28f3d1e8d93653e6f2b31a2bd375
 ```
 
 Their individual installation instructions are on their respective GitHub repositories.
