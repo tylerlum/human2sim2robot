@@ -513,13 +513,15 @@ ruff check --extend-select I --fix human2sim2robot; ruff format human2sim2robot
 # Citation
 
 ```
-@inproceedings{TODO,
-  title     = {TODO},
-  author    = {TODO},
-  booktitle = {TODO},
-  year      = {TODO},
-  url       = {TODO}
-}
+@misc{lum2025crossinghumanrobotembodimentgap,
+        author = {Tyler Ga Wei Lum and Olivia Y. Lee and C. Karen Liu and Jeannette Bohg},
+        title = {Crossing the Human-Robot Embodiment Gap with Sim-to-Real RL using One Human Demonstration},
+        year = {2025},
+        eprint = {2504.12609},
+        archivePrefix = {arXiv},
+        primaryClass = {cs.RO},
+        url = {https://arxiv.org/abs/2504.12609},
+      }
 ```
 
 # Contact
