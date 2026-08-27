@@ -21,7 +21,7 @@ Note: Because of some dependency conflicts, we need to use different environment
 
 # Fabrics
 
-We use a similar Geometric Fabric controller to the one used in [DextrAH-G](https://sites.google.com/view/dextrah-g). As of April 2025, this code is not currently open-source. It should be open-sourced soon! It is still possible to use this codebase without this, but you need to disable the Geometric Fabric and replace some of the Geometric Fabric code used for forward kinematics.
+We use a Geometric Fabric controller similar to the one used in [DextrAH-G](https://sites.google.com/view/dextrah-g). The Human2Sim2Robot-compatible controller is available on the [`Human2Sim2Robot` branch of FABRICS](https://github.com/tylerlum/FABRICS/tree/Human2Sim2Robot). The installation commands below pin the last tested commit for reproducibility.
 
 # Primary Environment
 
@@ -58,9 +58,10 @@ pip install -e . --no-build-isolation  # ~20 min
 
 # Fabrics
 cd $THIRD_PARTY_DIR
-git clone https://gitlab.com/tylerlum/fabrics-sim.git
+git clone --branch Human2Sim2Robot https://github.com/tylerlum/FABRICS.git fabrics-sim
 cd fabrics-sim
-git checkout Human2Sim2Robot # Last tested on commit hash 9b542217d1e615cc1892faa92238b6647716d507, may still work on more updated versions
+git checkout b56c9b1d7c927f5f8b7ca9464a3b5607a3777dae  # Last tested commit
+git lfs pull
 pip install -e .
 chmod +x urdfpy_patch.sh
 ./urdfpy_patch.sh  # This is only needed for Python 3.10+, but it doesn't hurt to run it
@@ -218,9 +219,10 @@ pip install -e . --no-build-isolation  # ~20 min
 
 # (COPY FROM PRIMARY ENV) Fabrics
 cd $THIRD_PARTY_DIR
-git clone https://gitlab.com/tylerlum/fabrics-sim.git
+git clone --branch Human2Sim2Robot https://github.com/tylerlum/FABRICS.git fabrics-sim
 cd fabrics-sim
-git checkout Human2Sim2Robot # Last tested on commit hash 9b542217d1e615cc1892faa92238b6647716d507, may still work on more updated versions
+git checkout b56c9b1d7c927f5f8b7ca9464a3b5607a3777dae  # Last tested commit
+git lfs pull
 pip install -e .
 chmod +x urdfpy_patch.sh
 ./urdfpy_patch.sh  # This is only needed for Python 3.10+, but it doesn't hurt to run it
